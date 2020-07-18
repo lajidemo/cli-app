@@ -8,19 +8,19 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
   },
   {
     path: '/about',
     name: 'About',
-    component: () => import('../views/About.vue')
-  }
+    component: () => import('../views/About.vue'),
+  },
 ]
 
 const router = new VueRouter({
   mode: 'hash',
-  // base: process.env.BASE_URL,
-  routes
+  base: process.env.BASE_URL,
+  routes,
 })
 
 export default router

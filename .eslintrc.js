@@ -4,6 +4,10 @@ module.exports = {
   plugins: [
     "vue"
   ],
+  env: {
+    "browser": true,
+    "node": true
+  },
   extends: [
     'plugin:vue/essential',
   ],
@@ -16,8 +20,8 @@ module.exports = {
     'block-spacing': [2, 'always'],
     'brace-style': [2, '1tbs', { 'allowSingleLine': true }],
     'camelcase': [2, { 'properties': 'always' }],
-    'comma-dangle': [2, 'never'],
-    'comma-spacing': [2, { 'before': false, 'after': true }],
+    'comma-dangle': [2, 'always-multiline'],
+    'comma-spacing': [2, { 'before': false, 'after': false }],
     'comma-style': [2, 'last'],
     'constructor-super': 2,
     'curly': [2, 'multi-line'],

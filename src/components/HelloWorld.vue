@@ -9,20 +9,20 @@ import { Button } from 'vant'
 export default {
   name: 'HelloWorld',
   components: {
-    Button
+    Button,
   },
   props: {
-    msg: String
+    msg: String,
   },
   methods: {
     toast () {
       this.$notify({
         message: '自定义颜色',
         color: '#ad0000',
-        background: '#ffe1e1'
+        background: '#ffe1e1',
       })
-    }
-  }
+    },
+  },
 }
 </script>
 
