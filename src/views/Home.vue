@@ -8,11 +8,15 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
+import common from '../serves/common'
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
-  }
+    HelloWorld,
+  },
+  created () {
+    this.$axios.get(common.login,{},{ timeout: 100 })
+  },
 }
 </script>

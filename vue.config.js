@@ -1,5 +1,5 @@
-const autoprefixer = require('autoprefixer');
-const pxtorem = require('postcss-pxtorem');
+const autoprefixer = require('autoprefixer')
+const pxtorem = require('postcss-pxtorem')
 
 module.exports = {
   css: {
@@ -24,9 +24,9 @@ module.exports = {
             rootValue: 16,
             propList: ['*'],
             // selectorBlackList: ["van-"],
-          })
-        ]
-      }
-    }
-  }
-};
+          }),
+        ],
+      },
+    },
+  },
+}
