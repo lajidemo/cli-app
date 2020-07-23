@@ -16,10 +16,8 @@ export default {
   },
   methods: {
     toast () {
-      this.$notify({
+      this.$toast({
         message: '自定义颜色',
-        color: '#ad0000',
-        background: '#ffe1e1',
       })
     },
   },

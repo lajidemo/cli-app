@@ -1,16 +1,17 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
-import store from './store'
-import $axios from './assets/js/config'
-import './serves/mock'
-import { Notify } from 'vant'
+import router from '@/router'
+import store from '@/store'
+import installApi from '@/serves/index'
+import '@/serves/mock'
+import { Toast } from 'vant'
 
 // 全局注册
-Vue.use(Notify)
+Vue.use(Toast)
+Vue.use(installApi)
 
 Vue.config.productionTip = false
-Vue.prototype.$axios = $axios
+// Vue.prototype.$axios = $axios
 
 new Vue({
   router,

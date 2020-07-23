@@ -1,29 +1,38 @@
 # cli-app
 
-## Project setup
+#### 项目运行
+
 ```
+# 安装包
 npm install
-```
-
-### Compiles and hot-reloads for development
-```
+# 本地运行
 npm run serve
-```
-
-### Compiles and minifies for production
-```
+# 打包
 npm run build
 ```
 
-### Run your tests
+#### 目录结构
+
 ```
-npm run test
+- public
+- src
+  - assets
+  - components
+  - router
+  - serves
+  - store
+  - views
+  - App.vue
+  - main.js
+- .eslintrc.js
+- .gitignore
+- babel.config.js
+- package.json
+- vue.config.js
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+
+

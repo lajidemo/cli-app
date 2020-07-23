@@ -1,14 +1,15 @@
 import axios from 'axios'
 import Vue from 'vue'
-import Loading from '../../components/Loading/Loading.vue'
+import Loading from '@/components/Loading/Loading'
+import { Toast } from 'vant'
 
 const AXIOSTIMEOUT = 20000
 
 const Axios = axios.create({
   timeout: AXIOSTIMEOUT,
 })
-let count = 0
 
+let count = 0
 function showLoading () {
   if (count === 0) {
     const loadingNote = document.createElement('div')
@@ -21,7 +22,6 @@ function showLoading () {
   }
   count++
 }
-
 function hideLoading () {
   count--
   if (count === 0) {
@@ -29,7 +29,7 @@ function hideLoading () {
     document.body.removeChild(loadingNote)
   }
 }
-
+// 请求拦截
 Axios.interceptors.request.use((config) => {
   console.log('请求==',config)
   if (!config.hideLoading) {
@@ -40,22 +40,27 @@ Axios.interceptors.request.use((config) => {
   }
   return config
 },(err) => {
-  // if (!config.hideLoading) {
-  //   showLoading()
-  // }
-  console.log(err)
+  console.log('请求err==',err)
   return err
 })
+// 响应拦截
 Axios.interceptors.response.use((res) => {
   console.log('响应==',res)
   if (!res.config.hideLoading) {
     hideLoading()
   }
-  return res
+  if (res.status === 200) {
+    return res
+  } else {
+    Toast({ message: '请求异常',duration: 2000 })
+    return Promise.reject(res)
+  }
 },(err) => {
-  // if (!res.config.hideLoading) {
-  //   hideLoading()
-  // }
+  if (!err.config.hideLoading) {
+    hideLoading()
+  }
+  console.log('响应err==',err)
+  Toast({ message: '连接服务器失败',duration: 2000 })
   return err
 })
 
