@@ -18,6 +18,7 @@ export default {
 <style lang="less" scoped>
   .Loading{
     position: fixed;
+    z-index: 99999;
     top: 0;
     bottom: 0;
     left: 0;

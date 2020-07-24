@@ -9,11 +9,33 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
-  },
-  {
+  },{
     path: '/about',
     name: 'About',
     component: () => import('@/views/About'),
+  },{
+    path: '/Car',
+    name: 'Car',
+    component: () => import('@/views/Car/Car'),
+    meta: {
+      keepAlive: true,
+    },
+  },{
+    path: '/Classify',
+    name: 'Classify',
+    component: () => import('@/views/Classify/Classify'),
+  },{
+    path: '/Find',
+    name: 'Find',
+    component: () => import('@/views/Find/Find'),
+  },{
+    path: '/Home',
+    name: 'Home',
+    component: () => import('@/views/Home/Home'),
+  },{
+    path: '/Person',
+    name: 'Person',
+    component: () => import('@/views/Person/Person'),
   },
 ]
 
