@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from '@/router'
 import store from '@/store'
 import installApi from '@/serves/index'
+import config from '@/assets/js/config'
 import '@/serves/mock'
 import { Toast } from 'vant'
 
@@ -11,7 +12,7 @@ Vue.use(Toast)
 Vue.use(installApi)
 
 Vue.config.productionTip = false
-// Vue.prototype.$axios = $axios
+config.setRouterBeforeEach(router)
 
 new Vue({
   router,

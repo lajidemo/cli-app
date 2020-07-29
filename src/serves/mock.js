@@ -2,7 +2,7 @@ import Mock from 'mockjs'
 import common from './common'
 
 Mock.setup({
-  timeout: '2000-6000', // 表示响应时间介于 200 和 600 毫秒之间。默认值是'10-100'。
+  timeout: '1000-2000', // 表示响应时间介于 200 和 600 毫秒之间。默认值是'10-100'。
 })
 Mock.mock(common.login,{
   // 属性 list 的值是一个数组，其中含有 1 到 10 个元素

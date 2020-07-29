@@ -12,6 +12,11 @@ export default {
 
     }
   },
+  created () {
+    this.$api.apiLogin().then(res => {
+      console.log('res===',res)
+    })
+  },
 }
 </script>
 

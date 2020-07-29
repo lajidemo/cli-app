@@ -1,7 +1,7 @@
 <template>
   <div class="Car">
-    <p>Car</p>
-    <p @click="jump">{{common.aliveRouters}}</p>
+    <p @click="back">Car2</p>
+    <p>{{common.aliveRouters}}</p>
   </div>
 </template>
 
@@ -9,7 +9,7 @@
 import { mapState } from 'vuex'
 
 export default {
-  name: 'Car',
+  name: 'Car2',
   data () {
     return {
 
@@ -19,8 +19,8 @@ export default {
     ...mapState(['common']),
   },
   methods: {
-    jump () {
-      this.$router.push('/Car1')
+    back () {
+      this.$router.back()
     },
   },
   created () {

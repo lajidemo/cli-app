@@ -3,13 +3,13 @@ const common = {
     aliveRouters: [],
   },
   mutations: {
-    updateAliveRouters (st,{ action,router }) {
+    updateAliveRouters (st,{ action,routerName }) {
       const methods = {
         add () {
-          st.aliveRouters.push(router)
+          st.aliveRouters.push(routerName)
         },
         del () {
-          st.aliveRouters.splice(st.aliveRouters.indexOf(router),1)
+          st.aliveRouters.splice(st.aliveRouters.indexOf(routerName),1)
         },
       }
       methods[action]()
