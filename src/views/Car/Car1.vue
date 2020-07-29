@@ -23,7 +23,7 @@ export default {
       this.$router.back()
     },
     jump () {
-      this.$router.push('/Car2')
+      this.$router.push({ name: 'Car2' })
     },
   },
   created () {

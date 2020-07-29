@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
+// 路由配置不可使用children
 const routes = [
   {
     path: '/Home',
@@ -24,20 +25,19 @@ const routes = [
     component: () => import(/* webpackChunkName: "Car" */ '@/views/Car/Car'),
     meta: {
       keepAlive: true,
-      fromRoutes: ['Car1'],
     },
   },{
-    path: '/Car1',
+    path: '/Car/Car1',
     name: 'Car1',
-    component: () => import(/* webpackChunkName: "Car1" */ '@/views/Car/Car1'),
+    component: () => import('@/views/Car/Car1'),
     meta: {
       keepAlive: true,
       fromRoutes: ['Car2'],
     },
   },{
-    path: '/Car2',
+    path: '/Car/Car2',
     name: 'Car2',
-    component: () => import(/* webpackChunkName: "Car2" */ '@/views/Car/Car2'),
+    component: () => import('@/views/Car/Car2'),
   },{
     path: '/Classify',
     name: 'Classify',

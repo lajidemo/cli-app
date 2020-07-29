@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     jump () {
-      this.$router.push('/Car1')
+      this.$router.push('/Car/Car1')
     },
   },
   created () {
