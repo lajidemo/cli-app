@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import store from '@/store/index'
+import utils from '@/utils/index'
 
 const { aliveRouters } = store.state.common
 
@@ -31,39 +32,48 @@ function delRoutes (item) {
   3.2、之后keep-alive的include匹配到to的路由，则走activated生命周期流程，即不刷新
   4、然后在全局混入的beforeRouterEnter里next回调方法里再添加to的路由
 
-  注：因为用了to.matched遍历，故路由配置不可使用children，因为如果匹配子路由matched会匹配到父路由和子路由，导致判断有问题
+  注：如果使用to.matched遍历，则路由配置不可使用children，因为如果匹配子路由matched会匹配到父路由和子路由，导致判断有问题
 */
 function setRouterBeforeEach (router) {
   router.beforeEach((to,from,next) => {
-    to.matched.forEach(item => {
-      // ↓↓↓ 配置的是从哪些页面跳转过去的需要to页面是缓存状态的
-      const fromRoutes = item.meta.fromRoutes
-      // 添加缓存路由：
-      //     未配置缓存路由数组（则所有页面跳转至to路由，该页面都是缓存状态） ||
-      //     首次进入 ||
-      //     fromRoutes配置了from.name
-      if (
-        item.meta.keepAlive &&
+    // to.matched.forEach(item => {
+    // ↓↓↓ fromRoutes 配置的是从哪些页面跳转过去的需要to页面是缓存状态的
+    const { fromRoutes,title } = to.meta || {}
+    title && utils.setPageTitle(title)
+    // 添加缓存路由：
+    //     未配置缓存路由数组（则所有页面跳转至to路由，该页面都是缓存状态） ||
+    //     首次进入 ||
+    //     fromRoutes配置了from.name
+    if (
+      to.meta.keepAlive &&
         (!fromRoutes || !from.name || fromRoutes.indexOf(from.name) !== -1)
-      ) {
-        console.log('回退添加000000')
-        addRoutes(item)
-      } else {
-        console.log('前进删除111111')
-        delRoutes(item)
-      }
-    })
-    next()
+    ) {
+      console.log('回退添加000000')
+      addRoutes(to)
+    } else {
+      console.log('前进删除111111')
+      delRoutes(to)
+    }
+    // })
+    const isLogin = false
+    if (to.name === 'Login') {
+      if (!isLogin) next()
+      else next('/Home')
+    } else {
+      if (!isLogin) next('/Login')
+      else next()
+    }
+    // next()
   })
 
   Vue.mixin({
     beforeRouteEnter (to,from,next) {
       next(() => {
-        to.matched.forEach(item => {
-          if (item.meta.keepAlive) {
-            addRoutes(item)
-          }
-        })
+        // to.matched.forEach(item => {
+        if (to.meta.keepAlive) {
+          addRoutes(to)
+        }
+        // })
       })
     },
   })

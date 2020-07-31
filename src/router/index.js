@@ -3,9 +3,16 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-// 路由配置不可使用children
+// 如果config.js使用to.matched遍历，路由配置不可使用children
 const routes = [
   {
+    path: '/Login',
+    name: 'Login',
+    component: () => import('@/views/Login/Login'),
+    meta: {
+      title: '登录',
+    },
+  },{
     path: '/Home',
     name: 'Home',
     component: () => import('@/views/Home/Home'),
@@ -62,6 +69,10 @@ const routes = [
   },{
     path: '/',
     redirect: '/Home',
+  },{
+    path: '*',
+    name: 'Error',
+    component: () => import('@/views/Error/Error'),
   },
 ]
 
