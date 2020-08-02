@@ -27,7 +27,7 @@ function delRoutes (item) {
 /*
   钩子触发顺序：beforeEach -> 全局混入beforeRouteEnter -> 路由组件beforeRouteEnter -> created/activated -> next回调
   1、在全局前置守卫beforeEach先判断to的路由是否标记为keepAlive: true
-  2、如不需要，则先删除store里to的缓存路由
+  2、如不需要或者匹配不到fromRoutes里的路由名称，则先删除store里to的缓存路由
   3.1、之后keep-alive的include匹配不到to的路由，则走created生命周期流程，即刷新
   3.2、之后keep-alive的include匹配到to的路由，则走activated生命周期流程，即不刷新
   4、然后在全局混入的beforeRouterEnter里next回调方法里再添加to的路由
@@ -55,7 +55,7 @@ function setRouterBeforeEach (router) {
       delRoutes(to)
     }
     // })
-    const isLogin = false
+    const isLogin = true
     if (to.name === 'Login') {
       if (!isLogin) next()
       else next('/Home')

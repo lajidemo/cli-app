@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState,mapMutations } from 'vuex'
 
 export default {
   name: 'Car1',
@@ -19,6 +19,7 @@ export default {
     ...mapState(['common']),
   },
   methods: {
+    ...mapMutations('common',['updateAliveRouters']),
     back () {
       this.$router.back()
     },
@@ -29,6 +30,7 @@ export default {
   created () {
     this.$api.apiLogin().then(res => {
       console.log('res===',res)
+      this.updateAliveRouters({ action: 'add',routerName: 'afsdfdf' })
     })
   },
 }
