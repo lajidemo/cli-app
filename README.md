@@ -1,29 +1,55 @@
 # cli-app
 
-## Project setup
+#### 分支说明
+
 ```
+# master
+主分支，预想当模块开发比较完善时可合并到该分支
+# dev
+合并迭代每月代码
+# dev_******
+每月开发的分支，如dev_202007
+```
+
+#### 项目笔记
+
+```
+笔记地址： https://github.com/lajidemo/project-notes.git
+```
+
+#### 项目运行
+
+```
+# 安装包
 npm install
-```
-
-### Compiles and hot-reloads for development
-```
+# 本地运行
 npm run serve
-```
-
-### Compiles and minifies for production
-```
+# 打包
 npm run build
 ```
 
-### Run your tests
+#### 目录结构
+
 ```
-npm run test
+- public
+- src
+  - assets
+  - components
+  - router
+  - serves
+  - store
+  - views
+  - App.vue
+  - main.js
+- .eslintrc.js
+- .gitignore
+- babel.config.js
+- package.json
+- vue.config.js
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+
+
