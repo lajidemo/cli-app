@@ -50,7 +50,12 @@ Axios.interceptors.response.use((res) => {
     hideLoading()
   }
   if (res.status === 200) {
-    return res
+    if (res.data.code === '00000000') {
+      return res
+    } else if (res.data.code === 'A00') {
+      Toast({ message: '未登录',duration: 2000 })
+      return Promise.reject(res)
+    }
   } else {
     Toast({ message: '请求异常',duration: 2000 })
     return Promise.reject(res)

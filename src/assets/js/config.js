@@ -55,26 +55,24 @@ function setRouterBeforeEach (router) {
       delRoutes(to)
     }
     // })
-    const isLogin = true
-    if (to.name === 'Login') {
-      if (!isLogin) next()
-      else next('/Home')
-    } else {
-      if (!isLogin) next('/Login')
-      else next()
-    }
-    // next()
+    next()
   })
 
   Vue.mixin({
     beforeRouteEnter (to,from,next) {
-      next(() => {
-        // to.matched.forEach(item => {
-        if (to.meta.keepAlive) {
-          addRoutes(to)
-        }
-        // })
-      })
+      // 跳转需登录的路由需要判断是否登录
+      if (to.name === 'Classify') {
+        const isLogin = sessionStorage.isLogin
+        !isLogin ? next('/Login') : next()
+      } else {
+        next(() => {
+          // to.matched.forEach(item => {
+          if (to.meta.keepAlive) {
+            addRoutes(to)
+          }
+          // })
+        })
+      }
     },
   })
 }
