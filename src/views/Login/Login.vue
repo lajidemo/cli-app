@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import utils from '@/utils'
 export default {
   name: 'Login',
   data () {
@@ -14,10 +14,12 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('common',['toggleLoginState']),
     loginFn () {
-      this.toggleLoginState(true)
-      this.$router.back()
+      this.$api.login().then(res => {
+        console.log('res===',res)
+        utils.toggleLoginState(true)
+        this.$router.back()
+      })
     },
   },
 }

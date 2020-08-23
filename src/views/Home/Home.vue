@@ -14,14 +14,17 @@ export default {
     }
   },
   created () {
-    this.$api.apiLogin().then(res => {
+    this.$api.getList().then(res => {
       console.log('res===',res)
     })
   },
   methods: {
     ...mapActions('common',['addCars']),
     addCar () {
-      this.addCars(this)
+      this.$api.addCars().then(res => {
+        console.log('res===',res)
+      })
+      // this.addCars(this)
     },
   },
 }

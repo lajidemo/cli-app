@@ -12,10 +12,14 @@ Vue.use(Toast)
 Vue.use(installApi)
 
 Vue.config.productionTip = false
+
+// 路由全局前置守卫，页面前置守卫
 config.setRouterBeforeEach(router)
 
-new Vue({
+const vm = new Vue({
   router,
   store,
   render: h => h(App),
 }).$mount('#app')
+
+window.vm = vm

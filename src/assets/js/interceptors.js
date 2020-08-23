@@ -53,7 +53,10 @@ Axios.interceptors.response.use((res) => {
     if (res.data.code === '00000000') {
       return res
     } else if (res.data.code === 'A00') {
-      Toast({ message: '未登录',duration: 2000 })
+      Toast({ message: res.data.message,duration: 1000,onClose: () => {
+        console.log('window.vm====',window.vm)
+        window.vm.$router.push('/Login')
+      } })
       return Promise.reject(res)
     }
   } else {

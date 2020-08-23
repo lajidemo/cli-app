@@ -20,13 +20,6 @@ const routes = [
       keepAlive: true,
     },
   },{
-    path: '/About',
-    name: 'About',
-    component: () => import('@/views/About'),
-    meta: {
-      keepAlive: true,
-    },
-  },{
     path: '/Car',
     name: 'Car',
     component: () => import(/* webpackChunkName: "Car" */ '@/views/Car/Car'),

@@ -61,9 +61,11 @@ function setRouterBeforeEach (router) {
   Vue.mixin({
     beforeRouteEnter (to,from,next) {
       // 跳转需登录的路由需要判断是否登录
-      if (to.name === 'Classify') {
-        const isLogin = sessionStorage.isLogin
-        !isLogin ? next('/Login') : next()
+      if (to.name === 'Login' && sessionStorage.isLogin) {
+        next('/Home')
+      // } else if (to.name === 'Classify') {
+      //   const isLogin = sessionStorage.isLogin
+      //   !isLogin ? next('/Login') : next()
       } else {
         next(() => {
           // to.matched.forEach(item => {
