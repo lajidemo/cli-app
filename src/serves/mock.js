@@ -1,3 +1,6 @@
+/**
+ * 所有接口的mock数据
+ */
 import Mock from 'mockjs'
 import commonApi from './commonApi'
 
@@ -10,17 +13,21 @@ const unLoginState = {
   message: '请先登录',
 }
 
+function mock (url,template) {
+  Mock.mock(new RegExp(url),template)
+}
+
 Mock.setup({
   timeout: '1000-2000', // 表示响应时间介于 200 和 600 毫秒之间。默认值是'10-100'。
 })
-Mock.mock(commonApi.login,{
+mock(commonApi.login,{
   ...successState,
   data: {
     // 占位符@：整个占位符需要用引号包裹，参考http://mockjs.com/examples.html#Basic
     cookie: '@string("number",20)',
   },
 })
-Mock.mock(commonApi.addCars,{
+mock(commonApi.addCars,{
   ...unLoginState,
   // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
   'list|1-10': [{
@@ -28,7 +35,7 @@ Mock.mock(commonApi.addCars,{
     'id|+1': 1,
   }],
 })
-Mock.mock(commonApi.getList,{
+mock(commonApi.getList,{
   ...successState,
   'list|1-10': [{
     'id|+1': 1,

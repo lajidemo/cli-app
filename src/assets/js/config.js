@@ -1,3 +1,6 @@
+/**
+ * 使用全局前置守卫beforeEach和路由组件守卫beforeRouteEnter动态缓存路由
+ */
 import Vue from 'vue'
 import store from '@/store/index'
 import utils from '@/utils/index'

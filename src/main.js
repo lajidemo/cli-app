@@ -1,3 +1,6 @@
+/**
+ * 入口文件
+ */
 import Vue from 'vue'
 import App from './App.vue'
 import router from '@/router'
@@ -13,7 +16,7 @@ Vue.use(installApi)
 
 Vue.config.productionTip = false
 
-// 路由全局前置守卫，页面前置守卫
+// 全局前置守卫，路由组件前置守卫
 config.setRouterBeforeEach(router)
 
 const vm = new Vue({

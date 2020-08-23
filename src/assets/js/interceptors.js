@@ -1,3 +1,8 @@
+/**
+ * 设置axios请求和响应拦截
+ * 全局添加请求loading效果
+ * 导出Axios的get和post方法
+ */
 import axios from 'axios'
 import Vue from 'vue'
 import Loading from '@/components/Loading/Loading'
@@ -18,7 +23,7 @@ function showLoading () {
     const $loading = Vue.extend(Loading)
     var _loading = new $loading().$mount()
     document.getElementById('loadingNote').appendChild(_loading.$el)
-    // new $loading().$mount('#loadingNote') // 此方法会直接替换掉“#loadingNote”元素
+    // new $loading().$mount('#loadingNote') // $mount方法会直接替换掉“#loadingNote”元素
   }
   count++
 }

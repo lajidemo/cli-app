@@ -14,7 +14,7 @@ export default {
     }
   },
   created () {
-    this.$api.getList().then(res => {
+    this.$api.getList({ aa: '2315665' },{ hideLoading: true }).then(res => {
       console.log('res===',res)
     })
   },

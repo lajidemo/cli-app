@@ -1,3 +1,6 @@
+/**
+ * 接口请求(请求方法，接口名，上送参数，自定义参数)
+ */
 import commonApi from './commonApi'
 import $axios from '@/assets/js/interceptors'
 

@@ -1,3 +1,6 @@
+/**
+ * eslint校验规则
+ */
 module.exports = {
   root: true,
   //　添加插件
