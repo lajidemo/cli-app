@@ -43,6 +43,10 @@ Axios.interceptors.request.use((config) => {
   if (config.timeout < AXIOSTIMEOUT) {
     config.timeout = AXIOSTIMEOUT
   }
+  config.headers = {
+    ...config.headers,
+    cookie: 'asdasdasds',
+  }
   return config
 },(err) => {
   console.log('请求err==',err)

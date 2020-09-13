@@ -9,9 +9,10 @@ import installApi from '@/serves/index'
 import config from '@/assets/js/config'
 import '@/serves/mock'
 import 'vant/lib/icon/local.css'
-import { Toast } from 'vant'
+import { Toast,Icon } from 'vant'
 // 全局注册
 Vue.use(Toast)
+Vue.use(Icon)
 Vue.use(installApi)
 
 Vue.config.productionTip = false
