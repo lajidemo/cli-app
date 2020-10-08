@@ -21,7 +21,7 @@ Mock.setup({
   timeout: '1000-2000', // 表示响应时间介于 200 和 600 毫秒之间。默认值是'10-100'。
 })
 mock(commonApi.login,{
-  ...successState,
+  ...unLoginState,
   data: {
     // 占位符@：整个占位符需要用引号包裹，参考http://mockjs.com/examples.html#Basic
     cookie: '@string("number",20)',

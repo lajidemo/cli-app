@@ -11,6 +11,15 @@ const routes = [
     component: () => import('@/views/Login/Login'),
     meta: {
       title: '登录',
+      keepAlive: true,
+      fromRoutes: ['Code'],
+    },
+  },{
+    path: '/Code',
+    name: 'Code',
+    component: () => import('@/views/Login/Code'),
+    meta: {
+      title: '验证码登录',
     },
   },{
     path: '/Home',
