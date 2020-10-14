@@ -15,3 +15,7 @@ export function addCars (params,config) {
 export function getList (params,config) {
   return $axios.get(commonApi.getList,params,config)
 }
+
+export function getPhoneCode (params,config) {
+  return $axios.get(commonApi.getPhoneCode,params,config)
+}

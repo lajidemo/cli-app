@@ -13,19 +13,21 @@
     </div>
     <div class="body">
       <p class="title">
-        <span v-if="isCdeLogin">手机验证码登录</span>
+        <span v-if="isCodeLogin">手机验证码登录</span>
         <span v-else>手机号密码登录</span>
       </p>
       <p class="agreement">登录即表明同意 <span>用户协议</span> 和 <span>隐私政策</span></p>
-      <div class="codeLogin" v-if="isCdeLogin">
-        <van-form validate-first @failed="onFailed" @submit="getCode">
+      <!-- 验证码登录 -->
+      <div class="codeLogin" v-if="isCodeLogin">
+        <van-form validate-first @submit="getCode">
           <div class="phone">
             <van-field
               class="ph"
-              v-model="phone"
+              v-model.trim="phone"
               type="tel"
+              maxlength="11"
               :border='false'
-              :rules="[{ pattern, message: '请输入正确手机号' }]"
+              :rules="[{ validator:validatorPhone, message: '请输入正确手机号' }]"
               placeholder="请输入手机号" />
             <!-- <input type="number" v-model.number="phone"> -->
             <p>未注册的手机号验证通过后将自动注册</p>
@@ -34,21 +36,23 @@
             class="submit"
             block
             round
-            type="info"
-            color='#bbb'>
+            type='primary'
+            :disabled='!isEnoughphoneLen'>
             获取短信验证码
           </van-button>
         </van-form>
       </div>
+      <!-- 密码登录 -->
       <div class="pswLogin" v-else>
-        <van-form validate-first @failed="onFailed" @submit="loginFn">
+        <van-form validate-first @submit="loginFn">
           <div class="phone">
             <van-field
               class="ph"
-              v-model="phone"
+              v-model.trim="phone"
               type="tel"
+              maxlength="11"
               :border='false'
-              :rules="[{ pattern, message: '请输入正确手机号' }]"
+              :rules="[{ validator:validatorPhone, message: '请输入正确手机号' }]"
               placeholder="请输入手机号" />
             <van-field
               class="ph"
@@ -59,25 +63,27 @@
           </div>
           <van-button
             class="submit"
-            :block='true'
-            round type="info"
-            color='#bbb'>
+            block
+            round
+            type='primary'
+            :disabled='!canSubmitLogin'>
             登录
           </van-button>
         </van-form>
       </div>
       <div class="toggleLogin">
-        <p class="" @click.stop="toggleLogin" v-show="isCdeLogin">密码登录</p>
-        <p class="" @click.stop="toggleLogin" v-show="!isCdeLogin">验证码登录</p>
-        <p class="" @click.stop="forgetPsw" v-show="!isCdeLogin">忘记密码</p>
+        <p class="" @click.stop="toggleLogin" v-show="isCodeLogin">密码登录</p>
+        <p class="" @click.stop="toggleLogin" v-show="!isCodeLogin">验证码登录</p>
+        <p class="" @click.stop="forgetPsw" v-show="!isCodeLogin">忘记密码</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import utils from '@/utils'
 import { Field,Button,Form,NavBar } from 'vant'
+import utils from '@/utils'
+
 export default {
   name: 'Login',
   components: {
@@ -88,53 +94,66 @@ export default {
   },
   data () {
     return {
-      isCdeLogin: true,
+      isCodeLogin: true,
       fromRouteName: '',
       phone: '',
       psw: '',
-      pattern: /\d{11}/,
     }
   },
-  beforeRouteEnter (to,from,next) {
-    next((vm) => {
-      vm.fromRouteName = from.name
-    })
+  created () {
+    this.fromRouteName = sessionStorage.getItem('fromRouteName') || 'Home'
+  },
+  computed: {
+    isEnoughphoneLen () {
+      return /\d{11}/.test(this.phone)
+    },
+    canSubmitLogin () {
+      return this.isEnoughphoneLen && this.psw
+    },
   },
   methods: {
+    validatorPhone (val) { // 校验手机号
+      return utils.phoneTest(val)
+    },
     onClickLeft () {
-
+      this.$router.back()
     },
-    onFailed () {
-      console.log('校验不通过')
+    getCode () { // 发送验证码接口
+      if (this.isEnoughphoneLen) {
+        this.$api.getPhoneCode({ phone: this.phone }).then(() => {
+          this.$router.push({
+            name: 'Code',
+            params: { phone: this.phone },
+          })
+        })
+      }
     },
-    getCode () {
-      console.log('获取验证码')
-      this.$router.push('Code')
-    },
-    toggleLogin () {
-      this.isCdeLogin = !this.isCdeLogin
+    toggleLogin () { // 切换登录方式
+      this.isCodeLogin = !this.isCodeLogin
     },
     forgetPsw () {
-
+      this.$router.push('FindPsw')
     },
-    loginFn () {
-      this.$api.login().then(res => {
-        console.log('res===',res)
-        utils.toggleLoginState('Y')
-        if (this.fromRouteName) {
-          this.$router.replace(this.fromRouteName)
-        } else {
-          this.$router.replace('Home')
+    loginFn () { // 登录
+      if (this.canSubmitLogin) {
+        const params = {
+          phone: this.phone,
+          psw: this.psw,
         }
-      })
+        this.$api.login(params).then(res => {
+          this.$toast.success('登陆成功')
+          utils.setCookie(res.cookieStr)
+          this.$router.replace(this.fromRouteName)
+        })
+      }
     },
   },
 }
 </script>
 
 <style lang="less" scoped>
+@import url('@/assets/css/globalVar');
 @size14: 14px;
-@blue: blue;
 .Login{
   background-color: #fff;
   // .close{

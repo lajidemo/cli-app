@@ -12,10 +12,10 @@ import '@/serves/mock'
 import 'vant/lib/icon/local.css'
 import { Toast,Icon } from 'vant'
 // 全局注册
-Vue.use(Toast)
 Vue.use(Icon)
 Vue.use(installApi)
 
+Vue.prototype.$toast = Toast
 Vue.config.productionTip = false
 
 // 全局前置守卫，路由组件前置守卫

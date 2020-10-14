@@ -17,7 +17,7 @@
       </div>
       <div class="phone">
         <van-password-input
-          :value="value"
+          :value="code"
           :length="4"
           :gutter="15"
           :focused="showKeyboard"
@@ -33,18 +33,23 @@
       </div>
       <van-button
         class="submit"
+        native-type="button"
+        @click="loginFn"
         block
         round
-        color='#bbb'>
+        type='primary'
+        :disabled='!isEnoughCodeLen'>
         登录
       </van-button>
-      <p class="reflsh">重新获取</p>
+      <p class="reflsh" @click.stop="getCode">重新获取</p>
     </div>
   </div>
 </template>
 
 <script>
 import { NavBar,PasswordInput,NumberKeyboard,Button } from 'vant'
+import utils from '@/utils'
+
 export default {
   name: 'Code',
   components: {
@@ -55,25 +60,54 @@ export default {
   },
   data () {
     return {
-      value: '',
+      fromRouteName: '',
+      phone: '',
+      code: '',
       showKeyboard: false,
     }
   },
+  created () {
+    this.phone = this.$route.params.phone || ''
+    this.fromRouteName = sessionStorage.getItem('fromRouteName') || 'Home'
+  },
+  computed: {
+    isEnoughCodeLen () {
+      return this.code.length === 4
+    },
+  },
   methods: {
+    loginFn () { // 登录
+      if (this.isEnoughCodeLen) {
+        const params = {
+          phone: this.phone,
+          code: this.code,
+        }
+        this.$api.login(params).then((res) => {
+          this.$toast.success('登陆成功')
+          utils.setCookie(res.cookieStr)
+          this.$router.replace(this.fromRouteName)
+        })
+      }
+    },
     onInput (key) {
-      this.value = (this.value + key).slice(0,6)
+      this.code = (this.code + key).slice(0,4)
     },
     onDelete () {
-      this.value = this.value.slice(0,this.value.length - 1)
+      this.code = this.code.slice(0,this.code.length - 1)
     },
     onClickLeft () {
       this.$router.back()
+    },
+    getCode () { // 重新获取验证码
+      this.code = ''
+      this.$api.getPhoneCode({ phone: this.phone })
     },
   },
 }
 </script>
 
 <style lang="less" scoped>
+@import url('@/assets/css/globalVar');
 .f22{
   font-size: 22px;
 }
@@ -91,7 +125,7 @@ export default {
   }
   .reflsh{
     text-align: center;
-    color: blue;
+    color: @blue;
     margin-top: 16px;
   }
 }

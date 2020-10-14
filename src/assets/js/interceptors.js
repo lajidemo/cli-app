@@ -45,7 +45,7 @@ Axios.interceptors.request.use((config) => {
   }
   config.headers = {
     ...config.headers,
-    cookie: 'asdasdasds',
+    cookie: localStorage.getItem('cookieStr'),
   }
   return config
 },(err) => {
@@ -60,10 +60,11 @@ Axios.interceptors.response.use((res) => {
   }
   if (res.status === 200) {
     if (res.data.code === '00000000') {
-      return res
+      return res.data.data
     } else if (res.data.code === 'A00') {
       Toast({ message: res.data.message,duration: 1000,onClose: () => {
         console.log('window.vm====',window.vm)
+        sessionStorage.setItem('fromRouteName',window.vm.$route.name)
         window.vm.$router.push('/Login')
       } })
       return Promise.reject(res)

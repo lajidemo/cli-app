@@ -12,7 +12,7 @@ const routes = [
     meta: {
       title: '登录',
       keepAlive: true,
-      fromRoutes: ['Code'],
+      fromRoutes: ['Code','FindPsw'],
     },
   },{
     path: '/Code',
@@ -20,6 +20,13 @@ const routes = [
     component: () => import('@/views/Login/Code'),
     meta: {
       title: '验证码登录',
+    },
+  },{
+    path: '/FindPsw',
+    name: 'FindPsw',
+    component: () => import('@/views/Login/FindPsw'),
+    meta: {
+      title: '找回密码',
     },
   },{
     path: '/Home',

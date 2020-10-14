@@ -1,21 +1,25 @@
 /**
  * 工具
  */
+const phoneReg = /^(13[0-9]|14[5|7]|15[0-9]|18[0-9])\d{8}$/
+
 // 设置页面title名
 function setPageTitle (title) {
   window.document.title = title
 }
 
-function toggleLoginState (state) { // 切换登录状态
-  sessionStorage.isLogin = state
+// 存储cookie
+function setCookie (cookie) {
+  localStorage.cookieStr = cookie
 }
 
-function setLoginTime (time) { // 存储登录的时间戳
-  sessionStorage.loginTime = time
+// 手机号正则
+function phoneTest (phone) {
+  return phoneReg.test(phone)
 }
 
 export default {
   setPageTitle,
-  toggleLoginState,
-  setLoginTime,
+  setCookie,
+  phoneTest,
 }
