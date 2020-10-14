@@ -96,7 +96,7 @@ export default {
       this.code = this.code.slice(0,this.code.length - 1)
     },
     onClickLeft () {
-      this.$router.back()
+      this.$router.replace('Login')
     },
     getCode () { // 重新获取验证码
       this.code = ''

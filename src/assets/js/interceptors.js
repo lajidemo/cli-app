@@ -65,7 +65,7 @@ Axios.interceptors.response.use((res) => {
       Toast({ message: res.data.message,duration: 1000,onClose: () => {
         console.log('window.vm====',window.vm)
         sessionStorage.setItem('fromRouteName',window.vm.$route.name)
-        window.vm.$router.push('/Login')
+        window.vm.$router.replace('/Login')
       } })
       return Promise.reject(res)
     }

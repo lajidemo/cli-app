@@ -1,5 +1,6 @@
 <template>
   <div class="Person">
+    <input type="text" v-model="val">
     <p @click.stop="toLogin">登录</p>
   </div>
 </template>
@@ -9,13 +10,13 @@ export default {
   name: 'Person',
   data () {
     return {
-
+      val: '',
     }
   },
   methods: {
     toLogin () {
       sessionStorage.setItem('fromRouteName','Person')
-      this.$router.push('Login')
+      this.$router.replace('Login')
     },
   },
 }

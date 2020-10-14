@@ -128,7 +128,7 @@ export default {
       })
     },
     onClickLeft () {
-      this.$router.back()
+      this.$router.replace('Login')
     },
   },
 }

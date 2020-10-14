@@ -116,12 +116,12 @@ export default {
       return utils.phoneTest(val)
     },
     onClickLeft () {
-      this.$router.back()
+      this.$router.replace(this.fromRouteName)
     },
     getCode () { // 发送验证码接口
       if (this.isEnoughphoneLen) {
         this.$api.getPhoneCode({ phone: this.phone }).then(() => {
-          this.$router.push({
+          this.$router.replace({
             name: 'Code',
             params: { phone: this.phone },
           })
@@ -132,7 +132,7 @@ export default {
       this.isCodeLogin = !this.isCodeLogin
     },
     forgetPsw () {
-      this.$router.push('FindPsw')
+      this.$router.replace('FindPsw')
     },
     loginFn () { // 登录
       if (this.canSubmitLogin) {
