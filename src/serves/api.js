@@ -19,3 +19,11 @@ export function getList (params,config) {
 export function getPhoneCode (params,config) {
   return $axios.get(commonApi.getPhoneCode,params,config)
 }
+
+export function getHomeSwipeImg (params,config) {
+  return $axios.get(commonApi.getHomeSwipeImg,params,config)
+}
+
+export function getGoodsList (params,config) {
+  return $axios.get(commonApi.getGoodsList,params,config)
+}

@@ -4,6 +4,7 @@
     <keep-alive :include="$store.state.common.aliveRouters">
       <router-view/>
     </keep-alive>
+    <p class="b-tabbar-bg"></p>
     <tabbar v-model="active" class="b-tabbar">
       <tabbar-item v-for="el in routerList" :key="el.router"
         :icon="el.icon" @click.stop="jump(el.router,el.index)"
@@ -61,6 +62,9 @@ export default {
 .b-tabbar{
   z-index: 10;
 }
+.b-tabbar-bg{
+  height: 50px;
+}
 .fixed100{
   position: fixed;
   top: 0;
@@ -68,5 +72,16 @@ export default {
   right: 0;
   bottom: 0;
   z-index: 100;
+}
+.h-padding16{
+  padding-left: 16px;
+  padding-right: 16px;
+}
+.v-padding16{
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+.padding16{
+  padding: 16px;
 }
 </style>

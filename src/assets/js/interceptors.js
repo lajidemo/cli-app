@@ -60,7 +60,7 @@ Axios.interceptors.response.use((res) => {
   }
   if (res.status === 200) {
     if (res.data.code === '00000000') {
-      return res.data.data
+      return res.data
     } else if (res.data.code === 'A00') {
       Toast({ message: res.data.message,duration: 1000,onClose: () => {
         console.log('window.vm====',window.vm)

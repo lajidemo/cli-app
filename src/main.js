@@ -10,8 +10,9 @@ import config from '@/assets/js/config'
 import '@/assets/css/reset.css'
 import '@/serves/mock'
 import 'vant/lib/icon/local.css'
-import { Toast,Icon } from 'vant'
+import { Toast,Icon,Lazyload } from 'vant'
 // 全局注册
+Vue.use(Lazyload)
 Vue.use(Icon)
 Vue.use(installApi)
 

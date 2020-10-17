@@ -1,7 +1,7 @@
 /**
  * 工具
  */
-const phoneReg = /^(13[0-9]|14[5|7]|15[0-9]|18[0-9])\d{8}$/
+const phoneReg = /^(13[0-9]|14[57]|15[0-9]|18[0-9])\d{8}$/
 
 // 设置页面title名
 function setPageTitle (title) {

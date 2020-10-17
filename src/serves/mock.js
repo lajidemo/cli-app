@@ -3,6 +3,7 @@
  */
 import Mock from 'mockjs'
 import commonApi from './commonApi'
+const Random = Mock.Random
 
 const successState = {
   code: '00000000',
@@ -43,4 +44,24 @@ mock(commonApi.getList,{
 })
 mock(commonApi.getPhoneCode,{
   ...successState,
+})
+mock(commonApi.getHomeSwipeImg,{
+  ...successState,
+  'imgList|6': [{
+    'src': () => Random.image('343x100',Random.color(),'#FFF','testImg'),
+    'alt': Mock.mock('@color'),
+  }],
+})
+mock(commonApi.getGoodsList,{
+  ...successState,
+  'goodsList|10': [{
+    'id': () => Random.integer(10000,99999),
+    'name': () => Random.ctitle(4,15),
+    'describe': () => Random.cparagraph(2),
+    'discount': () => Random.word(4,8),
+    'price|1-10000': 1,
+    'img': function () {
+      return Random.image('165x200',Random.color(),this.name)
+    },
+  }],
 })

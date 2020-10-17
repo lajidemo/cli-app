@@ -53,7 +53,7 @@ module.exports = {
         plugins: [
           autoprefixer(),
           pxtorem({
-            rootValue: 16,
+            rootValue: 14,
             propList: ['*'],
             // selectorBlackList: ["van-"],
           }),
